@@ -1,6 +1,11 @@
 import React from 'react';
 import Weather from './Components/Weather';
 import axios from 'axios';
+
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import './App.css';
 
 class App extends React.Component {
@@ -66,17 +71,19 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <header className="App-header">
-          <div>
-            <input type='text' id='city' name='city' placeholder="Enter a City" required value={this.state.search} onChange={this.handleChange}></input>
-            <button onClick={() => this.getWeather(true)}>Get Weather !</button>
-            <p>Or</p>
-            <button onClick={() => this.getWeather(false)}>Get current location</button>
-          </div>
+        <div className='search'>
+          <TextField type='text' id='standard-basic' margin='normal' name='city' placeholder="Enter a City" required value={this.state.search} onChange={this.handleChange}></TextField>
+          <Button variant='contained' color='primary' onClick={() => this.getWeather(true)}>Get Weather !</Button>
+          <p>Or</p>
+          <Button variant='contained' color='primary' onClick={() => this.getWeather(false)}>Get current location</Button>
+        </div>
+        <Card>
+          <CardContent>
           {this.state.data 
             && <Weather data={this.state}/>
           }
-        </header>
+          </CardContent>
+        </Card>
       </div>
     );
   }
