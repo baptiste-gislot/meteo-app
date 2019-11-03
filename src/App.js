@@ -4,8 +4,6 @@ import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import './App.css';
 
 class App extends React.Component {
@@ -70,20 +68,18 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="App">
+      <div className='App2'>
         <div className='search'>
           <TextField type='text' id='standard-basic' margin='normal' name='city' placeholder="Enter a City" required value={this.state.search} onChange={this.handleChange}></TextField>
           <Button variant='contained' color='primary' onClick={() => this.getWeather(true)}>Get Weather !</Button>
           <p>Or</p>
           <Button variant='contained' color='primary' onClick={() => this.getWeather(false)}>Get current location</Button>
         </div>
-        <Card>
-          <CardContent>
+        <div className='result'>
           {this.state.data 
             && <Weather data={this.state}/>
           }
-          </CardContent>
-        </Card>
+        </div>
       </div>
     );
   }
