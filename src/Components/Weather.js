@@ -1,25 +1,42 @@
 import React from 'react';
+import { swing } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
 import './Weather.css';
 
-function Weather(props){
+class Weather extends React.Component{
+  constructor(props){
+    super(props);
+    this.now = new Date();
+    this.date = this.now.getDate();
+    this.annee = this.now.getFullYear();
+    this.mois = this.now.getMonth() + 1;
 
-  return(
-    <div className="Card">
-      <div className='Temp'>
-        <p>{props.data.temp} °C</p>
-        <p>Min: {props.data.minTemp} °C / Max: {props.data.maxTemp} °C</p>
+    this.style = {
+      swing: {
+        animation: 'x 4s',
+        animationName: Radium.keyframes(swing, 'swing'),
+      },
+    };
+  }
+
+  render(){
+    return(
+      <div>
+        <h1 className="title">{this.props.data.city}</h1>
+        <div className='card'>
+          <p className='cityName'>{this.props.data.city}</p>
+          <p className='date'>{this.date}/{this.mois}/{this.annee}</p>
+          <StyleRoot>
+          <img className='imgWeather' style={this.style.swing} src={`https://openweathermap.org/img/wn/${this.props.data.icon}@2x.png`} alt={this.props.iconDesc} width='100px'/>
+          </StyleRoot>
+          <p className='temperature'>{`${this.props.data.temp.toFixed(1)} °C`}</p>
+          <p className='trait'>-----------</p>
+          <p className="weatherDescription">{this.props.data.iconDesc}</p>
+          <p className="tempMinMax">{Math.floor(this.props.data.minTemp)} °C / {Math.floor(this.props.data.maxTemp)} °C</p>
+        </div>
       </div>
-      <div className='City'>
-        <h2>{props.data.city}</h2>
-        <img src={`https://openweathermap.org/img/wn/${props.data.icon}@2x.png`} alt={props.iconDesc} width='100px'/>
-        <p>{props.data.description}</p>
-      </div>
-      <div className='Wind'>
-        <p>Wind Speed: {props.data.windSpeed * 3.6} Km/h</p>
-        <p>Wind Direction: <img src={process.env.PUBLIC_URL + `/assets/images/arrow.png`} alt='wind arrow' width='50px' style={{transform: `rotate(${props.data.windDeg}deg)`}} /></p>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Weather;

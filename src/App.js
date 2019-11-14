@@ -68,7 +68,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className='App2'>
+      <div className='App'>
         <div className='search'>
           <TextField type='text' id='standard-basic' margin='normal' name='city' placeholder="Enter a City" required value={this.state.search} onChange={this.handleChange}></TextField>
           <Button variant='contained' color='primary' onClick={() => this.getWeather(true)}>Get Weather !</Button>
